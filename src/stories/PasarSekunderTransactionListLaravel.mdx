@@ -1,0 +1,103 @@
+import { Meta, Canvas, Story, Controls } from "@storybook/addon-docs/blocks";
+import * as TransactionListStories from "./PasarSekunderTransactionList.stories";
+
+<Meta
+  title="Guides/Laravel Blade/Pasar Sekunder Transaction List"
+  of={TransactionListStories}
+/>
+
+# How To Use In Laravel Blade
+
+This component is a Web Component (`lit`) and can be used directly in Laravel Blade templates after your JS bundle is loaded.
+
+## 1. Register The Component In Your Frontend Entry
+
+In Laravel (Vite), import your component library in `resources/js/app.js`:
+
+```js
+import "shafiq-web-components";
+```
+
+If you are using a local build file instead of an npm package, import your local bundle path:
+
+```js
+import "../../path-to-your-web-components/dist/shafiq-web-components.es.js";
+```
+
+## 2. Load Assets In Your Blade Layout
+
+In your base layout (for example `resources/views/layouts/app.blade.php`), load Vite:
+
+```blade
+<!doctype html>
+<html lang="en">
+  <head>
+    @vite(["resources/css/app.css", "resources/js/app.js"])
+  </head>
+  <body>
+    @yield("content")
+  </body>
+</html>
+```
+
+## 3. Use The Component In Blade
+
+### Static data
+
+```blade
+<shafiq-pasar-sekunder-transaction-list
+  status="Pending"
+  kode-transaksi="#12345"
+  kode-efek="KMNC"
+  tanggal-transaksi="17-2-2024"
+  jumlah-lembar="200"
+  harga-perlembar="Rp. 100.000"
+  nominal-transaksi="Rp. 1.000.000.000"
+></shafiq-pasar-sekunder-transaction-list>
+```
+
+### Dynamic data from Laravel
+
+```blade
+<shafiq-pasar-sekunder-transaction-list
+  status="{{ $transaction->status }}"
+  kode-transaksi="#{{ $transaction->id }}"
+  kode-efek="{{ $transaction->stock_code }}"
+  tanggal-transaksi="{{ $transaction->transaction_date->format('j-n-Y') }}"
+  jumlah-lembar="{{ number_format($transaction->share_quantity) }}"
+  harga-perlembar="Rp. {{ number_format($transaction->price_per_share, 0, ',', '.') }}"
+  nominal-transaksi="Rp. {{ number_format($transaction->nominal_amount, 0, ',', '.') }}"
+></shafiq-pasar-sekunder-transaction-list>
+```
+
+## 4. Attribute Mapping (Blade -> Component Props)
+
+Use **kebab-case** attribute names in Blade:
+
+- `status` -> `status`
+- `kode-transaksi` -> `kodeTransaksi`
+- `kode-efek` -> `kodeEfek`
+- `tanggal-transaksi` -> `tanggalTransaksi`
+- `jumlah-lembar` -> `jumlahLembar`
+- `harga-perlembar` -> `hargaPerlembar`
+- `nominal-transaksi` -> `nominalTransaksi`
+
+## 5. Supported Status Values
+
+- `Pending`
+- `Expired`
+- `Canceled`
+- `Matched`
+- `Partial Matched`
+- `Partial Mach`
+- `Settled`
+
+## Live Playground
+
+Use Controls below to test values before wiring into Blade.
+
+<Canvas>
+  <Story of={TransactionListStories.Playground} />
+</Canvas>
+
+<Controls of={TransactionListStories.Playground} />

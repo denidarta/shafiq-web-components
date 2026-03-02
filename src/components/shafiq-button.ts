@@ -64,7 +64,7 @@ export class ShafiqButton extends LitElement {
     :host {
       display: inline-block;
       font-family: var(--sct-font-family-base, "Mulish", sans-serif);
-      font-weight: 600;
+      font-weight: var(--sct-font-weight-stronger, 600);
     }
 
     .button {
@@ -74,10 +74,10 @@ export class ShafiqButton extends LitElement {
       color: var(--sct-button-fg, #e8c976);
       cursor: pointer;
       display: inline-flex;
-      font-size: var(--sct-button-font-size, 13px);
+      font-size: var(--sct-button-font-size, var(--sct-font-size-200, 12px));
       gap: 2px;
       justify-content: center;
-      line-height: 16px;
+      line-height: var(--sct-line-height-200, 16px);
       min-width: var(--sct-button-min-width, auto);
       padding: var(--sct-button-py, 8px) var(--sct-button-px, 12px);
       text-decoration: none;
@@ -112,21 +112,21 @@ export class ShafiqButton extends LitElement {
     }
 
     .size-small {
-      --sct-button-font-size: 12px;
+      --sct-button-font-size: var(--sct-font-size-200, 12px);
       --sct-button-px: 12px;
       --sct-button-py: 6px;
       --sct-button-radius: 6px;
     }
 
     .size-medium {
-      --sct-button-font-size: 13px;
+      --sct-button-font-size: var(--sct-font-size-300, 14px);
       --sct-button-px: 12px;
       --sct-button-py: 8px;
       --sct-button-radius: 6px;
     }
 
     .size-large {
-      --sct-button-font-size: 13px;
+      --sct-button-font-size: var(--sct-font-size-300, 14px);
       --sct-button-px: 12px;
       --sct-button-py: 12px;
       --sct-button-radius: 6px;
