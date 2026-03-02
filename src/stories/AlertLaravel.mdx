@@ -1,0 +1,89 @@
+import { Meta, Canvas, Story, Controls } from "@storybook/addon-docs/blocks";
+import * as AlertStories from "./Alert.stories";
+
+<Meta title="Guides/Laravel Blade/Alert" of={AlertStories} />
+
+# How To Use In Laravel Blade
+
+`shafiq-alert` is a Lit Web Component and can be used directly in Blade templates after your JS bundle loads.
+
+## 1. Register / Load The Component Library
+
+In `resources/js/app.js`:
+
+```js
+import "shafiq-web-components";
+```
+
+If you use a local build path:
+
+```js
+import "../../path-to-your-web-components/dist/shafiq-web-components.es.js";
+```
+
+## 2. Load Vite In Your Blade Layout
+
+```blade
+<!doctype html>
+<html lang="en">
+  <head>
+    @vite(["resources/css/app.css", "resources/js/app.js"])
+  </head>
+  <body>
+    @yield("content")
+  </body>
+</html>
+```
+
+## 3. Use The Component In Blade
+
+### Dismissable alert
+
+```blade
+<shafiq-alert
+  type="danger"
+  title="Payment failed"
+  body="Your transaction could not be completed."
+  cta-label="View details"
+  dismissable
+></shafiq-alert>
+```
+
+### Persistent alert
+
+```blade
+<shafiq-alert
+  type="warning"
+  title="Account verification required"
+  body="Please complete your profile before trading."
+  cta-label="Complete now"
+  bg-color
+></shafiq-alert>
+```
+
+## 4. Attribute Mapping (Blade -> Component Props)
+
+- `type` -> `type` (`warning` | `danger` | `neutral` | `success`)
+- `figma-type` -> `figmaType` (`warning` | `error-danger` | `neutral` | `danger`)
+- `bg-color` -> `bgColor`
+- `lead-icon` -> `leadIcon`
+- `show-icon` -> `showIcon`
+- `dismissable` -> `dismissable`
+- `cta` -> `cta`
+- `title` -> `title`
+- `body` -> `body`
+- `cta-label` -> `ctaLabel`
+- `open` -> `open`
+
+## 5. Figma Compatibility Notes
+
+- `type="error-danger"` is supported as an alias to `danger`.
+- `figma-type="danger"` maps to semantic `success` (teal) style.
+
+## Live Playground
+
+<Canvas>
+  <Story of={AlertStories.Playground} />
+</Canvas>
+
+<Controls of={AlertStories.Playground} />

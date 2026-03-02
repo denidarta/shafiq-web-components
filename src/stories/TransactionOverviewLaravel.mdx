@@ -1,0 +1,78 @@
+import { Meta, Canvas, Story, Controls } from "@storybook/addon-docs/blocks";
+import * as TransactionOverviewStories from "./TransactionOverview.stories";
+
+<Meta title="Guides/Laravel Blade/Transaction Overview" of={TransactionOverviewStories} />
+
+# How To Use In Laravel Blade
+
+`shafiq-transaction-overview` is exported in an **unhydrated** mode by default.  
+You decide when to register/hydrate it in your frontend bootstrap.
+
+## 1. Register The Component In Your Frontend Entry
+
+In your Laravel Vite entry (`resources/js/app.js`), import and register:
+
+```js
+import { registerShafiqTransactionOverview } from "shafiq-web-components";
+
+registerShafiqTransactionOverview();
+```
+
+If you use a local build file:
+
+```js
+import {
+  registerShafiqTransactionOverview,
+} from "../../path-to-your-web-components/dist/shafiq-web-components.es.js";
+
+registerShafiqTransactionOverview();
+```
+
+## 2. Load Vite In Your Blade Layout
+
+```blade
+<!doctype html>
+<html lang="en">
+  <head>
+    @vite(["resources/css/app.css", "resources/js/app.js"])
+  </head>
+  <body>
+    @yield("content")
+  </body>
+</html>
+```
+
+## 3. Use The Component In Blade
+
+```blade
+<shafiq-transaction-overview
+  type="Bid"
+  breakpoint="Desktop"
+  saldo-dompet-aktif="Rp. 16.500.000"
+  saldo-dompet-dalam-proses="Rp. 16.500.000"
+  bid-pending="Rp. 1.500.000"
+  bid-match="Rp. 412.500.000"
+  bid-settled="Rp. 100.500.000"
+></shafiq-transaction-overview>
+```
+
+## 4. Attribute Mapping (Blade -> Component Props)
+
+- `type` -> `type` (`Bid` | `Offer`)
+- `breakpoint` -> `breakpoint` (`Desktop` | `Mobile`)
+- `saldo-dompet-aktif` -> `saldoDompetAktif`
+- `saldo-dompet-dalam-proses` -> `saldoDompetDalamProses`
+- `bid-pending` -> `bidPending`
+- `bid-match` -> `bidMatch`
+- `bid-settled` -> `bidSettled`
+- `offer-pending` -> `offerPending`
+- `offer-match` -> `offerMatch`
+- `offer-settled` -> `offerSettled`
+
+## Live Playground
+
+<Canvas>
+  <Story of={TransactionOverviewStories.Playground} />
+</Canvas>
+
+<Controls of={TransactionOverviewStories.Playground} />
